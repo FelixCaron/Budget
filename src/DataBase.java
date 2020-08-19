@@ -33,7 +33,5 @@ public static void load() {
 		e.printStackTrace();
 	}
 }
-public static void main(String[] args) {
-	
-}
+
 }

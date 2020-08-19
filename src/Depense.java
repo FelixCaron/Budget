@@ -1,4 +1,4 @@
 
-public class Depense {
+public class Depense extends CashFlow{
 
 }

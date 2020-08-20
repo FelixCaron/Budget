@@ -1,4 +1,6 @@
 
-public interface CashFlow {
+public abstract class CashFlow {
+Frequence frequence;
+float montant;
 
 }

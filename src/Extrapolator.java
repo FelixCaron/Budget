@@ -1,6 +1,6 @@
 import java.util.*;
 
 public class Extrapolator {
-Calendar today = new Calendar.getInstance();
+Calendar today = Calendar.getInstance();
 
 }

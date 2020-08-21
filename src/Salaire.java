@@ -1,6 +1,5 @@
 
-public class Salaire {
-int Valeur;
-Frequence freq;
+public class Salaire extends CashFlow{
+
 
 }

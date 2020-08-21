@@ -1,9 +1,11 @@
 
 public enum Frequence {
+Daily,
 Weekly,
 BiWeekly,
 Monthly,
-Annual;
+Annual,
+Unique;
 
 
 }

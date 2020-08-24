@@ -1,11 +1,12 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Extrapolator {
 Calendar today = Calendar.getInstance();
 Calendar from = today;
 Calendar to;
-ArrayList<Salaire> incomes;
-ArrayList<Depense> outcomes;
+ArrayList<Salary> incomes;
+ArrayList<CashOut> outcomes;
 float initialAmount;
 public float totalAtTo(){
     Calendar[] calendarsToFormat={today,from,to};
@@ -30,35 +31,35 @@ private void setCalendars(Calendar[] calendarsToFormat) {
 
 public float totalIncome() {
     float total = 0;
-    for (Salaire salaire : incomes) {
-        total=getTotalFor(salaire)+total;
+    for (Salary salary : incomes) {
+        total=getTotalFor(salary)+total;
     }
     return total;
     
 }
 public float totalOutcome() {
     float total = 0;
-    for (Depense depense : outcomes) {
-        total=getTotalFor(depense)+total;
+    for (CashOut cashOut : outcomes) {
+        total=getTotalFor(cashOut)+total;
     }
     return total;
 }
 
 private float getTotalFor(CashFlow cashFlow) {
-    float montant = cashFlow.montant;
-    int nombreDeFois = nombreDeFois(cashFlow);
-    return montant*nombreDeFois;
+    float amount = cashFlow.amount;
+    int numberOfTimes = numberOfTimes(cashFlow);
+    return amount*numberOfTimes;
 }
 
 
-//calcule du début de la journée from à la fin de la journée to
-private int nombreDeFois(CashFlow cashFlow) {
+//calculates from start of from to end of to
+private int numberOfTimes(CashFlow cashFlow) {
     Calendar firstDate = cashFlow.when;
-    Frequence frequence=cashFlow.frequence;
+    Frequency frequency=cashFlow.frequency;
     
     while (firstDate.before(from)){
         
-       switch (frequence) {
+       switch (frequency) {
             case Unique:
                 return 0;
             case Daily:
@@ -85,7 +86,7 @@ private int nombreDeFois(CashFlow cashFlow) {
        int numberOfTimes = 0;
        while (firstDate.before(to)){
         numberOfTimes++;
-        switch (frequence) {
+        switch (frequency) {
              case Daily:
                  firstDate.add(Calendar.DAY_OF_MONTH, 1);
              break;
@@ -109,20 +110,20 @@ private int nombreDeFois(CashFlow cashFlow) {
         }
 
     }
-    if(firstDate.equals(to)){numberOfTimes++;} // ajustement si paiement du à la dernière date
+    if(firstDate.equals(to)){numberOfTimes++;} // ajustement if payment due on last date
     return numberOfTimes;
 }
 
-// contructeur principal, est appelé par les autres constructeurs
-Extrapolator(Calendar From, Calendar To, ArrayList<Salaire> Incomes, ArrayList<Depense> Outcomes,float InitialAmount) {
+
+Extrapolator(Calendar From, Calendar To, ArrayList<Salary> Incomes, ArrayList<CashOut> Outcomes,float InitialAmount) {
     from = From;
     to = To;
     incomes = Incomes;
     outcomes = Outcomes;
     initialAmount= InitialAmount;
 }
-//autres constructeurs
-Extrapolator(Calendar To, ArrayList<Salaire> Incomes,ArrayList<Depense> Outcomes, float InitialAmount){
+
+Extrapolator(Calendar To, ArrayList<Salary> Incomes,ArrayList<CashOut> Outcomes, float InitialAmount){
     this(Calendar.getInstance(), To, Incomes, Outcomes, InitialAmount);
 }
 
@@ -130,10 +131,10 @@ Extrapolator(Calendar To, ArrayList<Salaire> Incomes,ArrayList<Depense> Outcomes
 
 Extrapolator(Calendar To,float InitialAmount){
     
-    this(Calendar.getInstance(), To, DataBase.salaires, DataBase.depenses, InitialAmount);}
+    this(Calendar.getInstance(), To, DataBase.salarys, DataBase.cashOuts, InitialAmount);}
 
 public Extrapolator(Calendar calFrom, Calendar calTo, int i) {
-    this(calFrom, calTo, DataBase.salaires, DataBase.depenses, i);}
+    this(calFrom, calTo, DataBase.salarys, DataBase.cashOuts, i);}
 }
 
 

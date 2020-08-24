@@ -2,12 +2,12 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 public abstract class CashFlow implements Serializable{
-Frequence frequence;
-float montant;
+Frequency frequency;
+float amount;
 Calendar when;
-CashFlow(float Montant, Calendar quand, Frequence f){
-    montant=Montant;
-    when=quand;
-    frequence=f;
+CashFlow(float Amount, Calendar When, Frequency f){
+    amount=Amount;
+    when=When;
+    frequency=f;
 }
 }

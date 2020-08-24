@@ -1,15 +1,11 @@
-import java.io.Console;
 import java.util.Calendar;
-import java.util.Scanner;
 import java.util.Calendar.Builder;
-
-import javax.swing.plaf.synth.SynthStyle;
-import javax.xml.crypto.Data;
+import java.util.Scanner;
 
 public class CmdLnApp {
-    private static final boolean Salaire = true;
-    private static final boolean Depense = false;
-    Scanner in;
+    private static final boolean typeSalary = true;
+    private static final boolean typeCashOut = false;
+    Scanner scanner;
 
     public static void launch() {
         new CmdLnApp();
@@ -18,10 +14,10 @@ public class CmdLnApp {
 
     CmdLnApp() {
         System.out.println("App is started, waiting for command");
-        in = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         while (true) {
             System.out.print("> ");
-            executeCommand(in.nextLine());
+            executeCommand(scanner.nextLine());
         }
 
     }
@@ -41,8 +37,8 @@ public class CmdLnApp {
                 break;
             case "calculate":
             
-            Extrapolator extrapol =  new Extrapolator(getfromCal(), getToCal(), DataBase.salaires, DataBase.depenses, getInitialAmount());
-                System.out.println("Le " + extrapol.to.getTime().toGMTString()+" vous aurez " +extrapol.totalAtTo()+"$");
+            Extrapolator extrapol =  new Extrapolator(getfromCal(), getToCal(), DataBase.salarys, DataBase.cashOuts, getInitialAmount());
+                System.out.println("On " + extrapol.to.getTime().toGMTString()+" you will have " +extrapol.totalAtTo()+"$");
               
                 break;
             case "add":
@@ -50,8 +46,8 @@ public class CmdLnApp {
            System.out.println("Added");
             break;
         case "clear":
-        DataBase.depenses.clear();
-        DataBase.salaires.clear();
+        DataBase.cashOuts.clear();
+        DataBase.salarys.clear();
         System.out.println("Cleared");
         break;
         case "save":
@@ -71,19 +67,19 @@ public class CmdLnApp {
     
     private void add() {
         float amount = getAmount();
-        Frequence freq = getFrequence();
+        Frequency freq = getFrequence();
         Boolean type = getType();
         Calendar when = getWhen();
-        if(type==Salaire){
-            new Salaire(amount, when, freq);
+        if(type==typeSalary){
+            new Salary(amount, when, freq);
         }else{
-            new Depense(amount, when, freq);
+            new CashOut(amount, when, freq);
         }
     }
 
     private Calendar getWhen() {
         System.out.print("Enter date of transaction 'aaaa/mm/jj' (empty is today):");
-        String dataIn = in.nextLine();
+        String dataIn = scanner.nextLine();
         Calendar fromCal;
         if(dataIn.equals("")){
             fromCal = Calendar.getInstance();
@@ -108,12 +104,12 @@ public class CmdLnApp {
         System.out.println("Depense  (1)");
         System.out.print("Enter type (0-1): ");
         
-        String dataIn = in.nextLine();
+        String dataIn = scanner.nextLine();
          switch (dataIn){
             case "0":
-            return Salaire;
+            return typeSalary;
             case "1":
-            return Depense;
+            return typeCashOut;
             default:
 
             return getType();
@@ -122,8 +118,8 @@ public class CmdLnApp {
         
     }
 
-    private Frequence getFrequence() {
-        Frequence f;
+    private Frequency getFrequence() {
+        Frequency f;
         System.out.println("Daily    (0)");
         System.out.println("Weekly   (1)");
         System.out.println("BiWeekly (2)");
@@ -132,8 +128,8 @@ public class CmdLnApp {
         System.out.println("Unique   (5)");
         System.out.print("Enter frequency (0-5): ");
         try{
-        String dataIn = in.nextLine();
-         f = Frequence.values()[Integer.parseInt(dataIn)];
+        String dataIn = scanner.nextLine();
+         f = Frequency.values()[Integer.parseInt(dataIn)];
         } catch (Exception e) {
             System.out.println("Wrong input");
             f = getFrequence();
@@ -145,7 +141,7 @@ public class CmdLnApp {
         float amount;
         try {
             System.out.print("Enter amount: ");
-        String dataIn = in.nextLine();
+        String dataIn = scanner.nextLine();
         amount = Float.parseFloat(dataIn);
         } catch (Exception e) {
             System.out.println("Wrong input");
@@ -160,7 +156,7 @@ public class CmdLnApp {
         float amount;
         try {
             System.out.print("Enter initial amount: ");
-        String dataIn = in.nextLine();
+        String dataIn = scanner.nextLine();
         amount = Float.parseFloat(dataIn);
         } catch (Exception e) {
             System.out.println("Wrong input");
@@ -174,7 +170,7 @@ public class CmdLnApp {
 
     private Calendar getfromCal() {
         System.out.print("Enter start date 'aaaa/mm/jj' (empty is today):");
-        String dataIn = in.nextLine();
+        String dataIn = scanner.nextLine();
         Calendar fromCal;
         if(dataIn.equals("")){
             fromCal = Calendar.getInstance();
@@ -195,7 +191,7 @@ public class CmdLnApp {
     }
     private Calendar getToCal() {
         System.out.print("Enter end date 'aaaa/mm/jj' (empty is in one month):");
-        String dataIn = in.nextLine();
+        String dataIn = scanner.nextLine();
         Calendar toCal;
         if(dataIn.equals("")){
            toCal = Calendar.getInstance();

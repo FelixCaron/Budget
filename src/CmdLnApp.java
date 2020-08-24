@@ -107,22 +107,18 @@ public class CmdLnApp {
         System.out.println("Salaire  (0)");
         System.out.println("Depense  (1)");
         System.out.print("Enter type (0-1): ");
-        try{
+        
         String dataIn = in.nextLine();
          switch (dataIn){
             case "0":
             return Salaire;
             case "1":
-            System.out.println("Wrong input");
             return Depense;
             default:
 
             return getType();
          }
-        } catch (Exception e) {
-            System.out.println("Wrong input");
-            return getType();
-        }
+        
         
     }
 
@@ -136,8 +132,8 @@ public class CmdLnApp {
         System.out.println("Unique   (5)");
         System.out.print("Enter frequency (0-5): ");
         try{
-        int dataIn = in.nextInt();
-         f = Frequence.values()[dataIn];
+        String dataIn = in.nextLine();
+         f = Frequence.values()[Integer.parseInt(dataIn)];
         } catch (Exception e) {
             System.out.println("Wrong input");
             f = getFrequence();

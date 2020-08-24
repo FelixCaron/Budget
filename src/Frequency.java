@@ -1,5 +1,5 @@
 
-public enum Frequence {
+public enum Frequency {
 Daily,
 Weekly,
 BiWeekly,

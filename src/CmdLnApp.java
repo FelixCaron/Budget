@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.Calendar.Builder;
 
 import javax.swing.plaf.synth.SynthStyle;
+import javax.xml.crypto.Data;
 
 public class CmdLnApp {
     private static final boolean Salaire = true;
@@ -48,7 +49,20 @@ public class CmdLnApp {
            add();
            System.out.println("Added");
             break;
-        
+        case "clear":
+        DataBase.depenses.clear();
+        DataBase.salaires.clear();
+        System.out.println("Cleared");
+        break;
+        case "save":
+        DataBase.save();
+        System.out.println("Saved");
+        break;
+        case "exit":
+        DataBase.save();
+        System.exit(0);
+        break;
+
             default:
            
             System.out.println("Command not recognized, verify your spelling or type 'help' for help");

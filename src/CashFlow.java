@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Calendar;
 
-public abstract class CashFlow {
+public abstract class CashFlow implements Serializable{
 Frequence frequence;
 float montant;
 Calendar when;

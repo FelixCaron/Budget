@@ -28,6 +28,8 @@ public static void load() {
 		ObjectInputStream oos = new ObjectInputStream(fos);
 		depenses=(ArrayList<Depense>) oos.readObject();
 		salaires=(ArrayList<Salaire>) oos.readObject();
+		oos.close();
+		fos.close();
 	} catch (IOException | ClassNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

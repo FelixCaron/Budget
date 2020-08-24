@@ -28,7 +28,7 @@ private void setCalendars(Calendar[] calendarsToFormat) {
     }
 }
 
-private float totalIncome() {
+public float totalIncome() {
     float total = 0;
     for (Salaire salaire : incomes) {
         total=getTotalFor(salaire)+total;
@@ -36,7 +36,7 @@ private float totalIncome() {
     return total;
     
 }
-private float totalOutcome() {
+public float totalOutcome() {
     float total = 0;
     for (Depense depense : outcomes) {
         total=getTotalFor(depense)+total;
@@ -51,7 +51,7 @@ private float getTotalFor(CashFlow cashFlow) {
 }
 
 
-
+//calcule du début de la journée from à la fin de la journée to
 private int nombreDeFois(CashFlow cashFlow) {
     Calendar firstDate = cashFlow.when;
     Frequence frequence=cashFlow.frequence;
@@ -109,6 +109,7 @@ private int nombreDeFois(CashFlow cashFlow) {
         }
 
     }
+    if(firstDate.equals(to)){numberOfTimes++;} // ajustement si paiement du à la dernière date
     return numberOfTimes;
 }
 

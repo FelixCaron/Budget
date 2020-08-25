@@ -1,7 +1,11 @@
+package Main;
+
+import UI.UIApp;
+
 public class Main {
 public static void main(String[] args) {
     DataBase.load();
-CmdLnApp.launch();
+UIApp.launch();
 }
 
 

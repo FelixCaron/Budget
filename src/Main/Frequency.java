@@ -1,3 +1,4 @@
+package Main;
 
 public enum Frequency {
 Daily,

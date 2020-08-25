@@ -8,6 +8,9 @@ CmdLnApp.launch();
 
 //add and calculate methods need to be defined in UI AND in cmdln SEPARATELY because it requires user entries
 //here are functions accessed by cmdln AND UI
+
+
+//clears the data contained in DATABASE
 public static boolean clearAll(){
     try {
     DataBase.cashOuts.clear();
@@ -21,7 +24,7 @@ public static boolean clearAll(){
 
 
 
-
+//Saves every added element in Database
 public static boolean save() {
     try {
         DataBase.save();
@@ -35,7 +38,7 @@ public static boolean save() {
 
 
 
-
+//Saves and exit the app
 public static void exit() {
     if(save()){
         System.exit(0);

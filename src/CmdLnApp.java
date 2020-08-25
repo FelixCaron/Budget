@@ -25,6 +25,7 @@ public class CmdLnApp {
     private void executeCommand(String commandName) {
         commandName = commandName.toLowerCase();
         switch (commandName) {
+            //Show help dialog
             case "Help":
             case "help":
                 System.out.println("Calculate: Calculate something");
@@ -35,15 +36,23 @@ public class CmdLnApp {
                 System.out.println("Exit: Save data and exit current application");
                 System.out.println("For details or suggestions, write to 'felix.caron2@yahoo.ca'");
                 break;
+
+                //next methods are defined separately in cmdln and UI
+                //calculates the amount in account at the end of date A from beginning of date B at C$ in accounts
             case "calculate":
                 Extrapolator extrapol =  new Extrapolator(getfromCal(), getToCal(), DataBase.salarys, DataBase.cashOuts, getInitialAmount());
                 System.out.println("On " + extrapol.to.getTime().toGMTString()+" you will have " +extrapol.totalAtTo()+"$");
               
                 break;
+
+                //creates a new cashflow and sets it up
             case "add":
            add();
            System.out.println("Added");
             break;
+
+            //for next methods, they are centralized in main(see main for further details)
+            
         case "clear":
         if(Main.clearAll()){
             System.out.println("Cleared");}

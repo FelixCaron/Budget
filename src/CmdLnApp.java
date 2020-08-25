@@ -36,8 +36,7 @@ public class CmdLnApp {
                 System.out.println("For details or suggestions, write to 'felix.caron2@yahoo.ca'");
                 break;
             case "calculate":
-            
-            Extrapolator extrapol =  new Extrapolator(getfromCal(), getToCal(), DataBase.salarys, DataBase.cashOuts, getInitialAmount());
+                Extrapolator extrapol =  new Extrapolator(getfromCal(), getToCal(), DataBase.salarys, DataBase.cashOuts, getInitialAmount());
                 System.out.println("On " + extrapol.to.getTime().toGMTString()+" you will have " +extrapol.totalAtTo()+"$");
               
                 break;
@@ -46,17 +45,23 @@ public class CmdLnApp {
            System.out.println("Added");
             break;
         case "clear":
-        DataBase.cashOuts.clear();
-        DataBase.salarys.clear();
-        System.out.println("Cleared");
+        if(Main.clearAll()){
+            System.out.println("Cleared");}
+        else{
+            System.out.println("There was an error clearing data");
+        }
         break;
         case "save":
-        DataBase.save();
-        System.out.println("Saved");
+        if(Main.save()){
+            System.out.println("Saved");
+        }else{
+            System.out.println("There was an error, your content might not be saved");
+        }
+        
         break;
         case "exit":
-        DataBase.save();
-        System.exit(0);
+       Main.exit();
+       System.out.println("There was an error, this should really not happen... ");
         break;
 
             default:
